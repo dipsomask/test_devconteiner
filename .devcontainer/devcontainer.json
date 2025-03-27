@@ -32,8 +32,5 @@
                 "--header-insertion=never"
             ]
         }
-    },
-    "postCreateCommand": [
-        "make"
-    ]
+    }
 }
