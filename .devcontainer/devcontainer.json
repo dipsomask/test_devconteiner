@@ -1,0 +1,39 @@
+{
+    "name": "DM",
+    "image": "dipsomask/debian12_cmake:latest",
+    "runArgs": [
+        "--network=host",
+        "--volume=/tmp/.X11-unix:/tmp/.X11-unix",
+        "--volume=/dev:/dev",
+        "--env='DISPLAY=$DISPLAY'",
+        "--privileged",
+        "--mount", "type=bind,src=/var/run/docker.sock,target=/var/run/docker.sock"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "llvm-vs-code-extensions.vscode-clangd",
+                "ms-vscode.cmake-tools",
+                "ms-vscode.cpptools",
+                "twxs.cmake",
+                "xaver.clang-format",
+                "cweijan.vscode-database-client2",
+                "ms-azuretools.vscode-docker"
+            ]
+        },
+        "settings": {
+            "cmake.copyCompileCommands": "${workspaceFolder}/.vscode/compile_commands.json",
+            "clangd.path": "/usr/bin/clangd",
+            "clangd.arguments": [
+                "--background-index",
+                "--compile-commands-dir=.vscode",
+                "--clang-tidy",
+                "--completion-style=detailed",
+                "--header-insertion=never"
+            ]
+        }
+    },
+    "postCreateCommand": [
+        "make"
+    ]
+}
